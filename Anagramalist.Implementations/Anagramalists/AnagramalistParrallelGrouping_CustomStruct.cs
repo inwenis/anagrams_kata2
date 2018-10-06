@@ -1,15 +1,16 @@
-﻿using System.Collections.Concurrent;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using test_string_vs_struct;
 
 namespace Anagramalist.Implementations
 {
     public class AnagramalistParrallelGrouping_CustomStruct : IAnagramalist
     {
-        public string[] FindAllAnagrams(string[] words)
+        public string[] FindAllAnagrams(byte[] bytes)
         {
+            var allText = Encoding.UTF8.GetString(bytes);
+            var words = allText.Split('\n');
+
             var anagrams = words
                 .AsParallel()
                 .GroupBy(w => IRepresentOrderdString.FromString(w))

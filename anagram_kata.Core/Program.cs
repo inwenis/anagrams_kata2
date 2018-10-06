@@ -15,27 +15,18 @@ namespace anagram_kata2
 
             // the data comes from here http://codekata.com/kata/kata06-anagrams/
             var expectedNumberOfAnagrams = 20683;
-            var allLines = File.ReadAllLines("wordlist.txt");
-            var words = allLines
-                .Where(x => x != string.Empty)
-                .ToArray();
-
-            var bytes = words.Select(x => Encoding.UTF8.GetBytes(x)).ToArray();
+            var allBytes = File.ReadAllBytes("wordlist.txt");
 
             var testRepeatCount = 50;
-            var implementationsUsingBytes = new List<IAnagramalistFromBytes>()
-            {
-                new AnagramalistParrallelGrouping_CustomStruct_Bytes(),
-                new AnagramalistParrallelGrouping_CustomStruct_Bytes_2(),
-            };
-            Tester_bytes.TestAll(bytes, expectedNumberOfAnagrams, implementationsUsingBytes, testRepeatCount: testRepeatCount);
 
             var implementations = new List<IAnagramalist>()
             {
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes(),
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes_2(),
                 new AnagramalistParrallelGrouping_CustomStruct(),
                 new AnagramalistParallelLinq(),
             };
-            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
+            Tester.TestAll(allBytes, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
         }
 
     }

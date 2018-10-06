@@ -2,6 +2,6 @@
 {
     public interface IAnagramalist
     {
-        string[] FindAllAnagrams(string[] words);
+        string[] FindAllAnagrams(byte[] bytes);
     }
 }

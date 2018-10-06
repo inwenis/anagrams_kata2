@@ -7,7 +7,7 @@ namespace Anagramalist.Implementations
 {
     public class Tester
     {
-        public static void TestAll(string[] words, int expectedNumberOfAnagrams, List<IAnagramalist> suts, int testRepeatCount)
+        public static void TestAll(byte[] words, int expectedNumberOfAnagrams, List<IAnagramalist> suts, int testRepeatCount)
         {
             var results = new List<dynamic>();
             foreach (var sut in suts)
@@ -27,7 +27,7 @@ namespace Anagramalist.Implementations
             }
         }
 
-        public static TestResult RunMultileTests(IAnagramalist sut, string[] words, int testRepeatCount, int expectedNumberOfAnagrams)
+        public static TestResult RunMultileTests(IAnagramalist sut, byte[] words, int testRepeatCount, int expectedNumberOfAnagrams)
         {
             // run the anagramalist here so the JITer will compile all code
             var resultLost = RunSingleTest(sut, words);
@@ -57,7 +57,7 @@ namespace Anagramalist.Implementations
             return testResult;
         }
 
-        private static SingleTestResult RunSingleTest(IAnagramalist sut, string[] words)
+        private static SingleTestResult RunSingleTest(IAnagramalist sut, byte[] words)
         {
             var sw = new Stopwatch();
             sw.Start();

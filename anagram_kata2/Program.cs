@@ -10,22 +10,21 @@ namespace anagram_kata2
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(".Net Framework");
             // the data comes from here http://codekata.com/kata/kata06-anagrams/
             var expectedNumberOfAnagrams = 20683;
-            var allLines = File.ReadAllLines("wordlist.txt");
-            var words = allLines
-                .Where(x => x != string.Empty)
-                .ToArray();
+            var allBytes = File.ReadAllBytes("wordlist.txt");
+
+            var testRepeatCount = 50;
 
             var implementations = new List<IAnagramalist>()
             {
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes(),
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes_2(),
                 new AnagramalistParrallelGrouping_CustomStruct(),
-                new AnagramalistLinq(),
                 new AnagramalistParallelLinq(),
-                new AnagramalistDictionary(),
             };
-            Console.WriteLine(".Net Framework");
-            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: 50);
+            Tester.TestAll(allBytes, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
         }
     }
 }

@@ -1,14 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using test_string_vs_struct;
 
 namespace Anagramalist.Implementations
 {
-    public class AnagramalistParrallelGrouping_CustomStruct_Bytes : IAnagramalistFromBytes
+    public class AnagramalistParrallelGrouping_CustomStruct_Bytes : IAnagramalist
     {
-        public string[] FindAllAnagrams(byte[][] bytes)
+        public string[] FindAllAnagrams(byte[] bytes)
         {
-            var anagrams = bytes
+            var splitByteArray = SplitByteArray(bytes, Encoding.UTF8.GetBytes("\n").Single());
+
+            var anagrams = splitByteArray
                 .AsParallel()
                 .GroupBy(word => IRepresentOrderdString.FromBytes(word))
                 .Where(group => group.Count() > 1)
@@ -16,13 +20,37 @@ namespace Anagramalist.Implementations
                 .ToArray();
             return anagrams.ToArray();
         }
+
+        public static IEnumerable<Byte[]> SplitByteArray(IEnumerable<Byte> source, byte marker) {
+            if (null == source)
+                throw new ArgumentNullException("source");
+
+            List<byte> current = new List<byte>();
+
+            foreach (byte b in source) {
+                if (b == marker) {
+                    if (current.Count > 0)
+                        yield return current.ToArray();
+
+                    current.Clear();
+                }
+
+                current.Add(b);
+            }
+
+            if (current.Count > 0)
+                yield return current.ToArray();
+        }
     }
 
-    public class AnagramalistParrallelGrouping_CustomStruct_Bytes_2 : IAnagramalistFromBytes
+    public class AnagramalistParrallelGrouping_CustomStruct_Bytes_2 : IAnagramalist
     {
-        public string[] FindAllAnagrams(byte[][] bytes)
+        public string[] FindAllAnagrams(byte[] bytes)
         {
-            var anagrams = bytes
+            var splitByteArray = AnagramalistParrallelGrouping_CustomStruct_Bytes
+                .SplitByteArray(bytes, Encoding.UTF8.GetBytes("\n").Single());
+
+            var anagrams = splitByteArray
                 .AsParallel()
                 .GroupBy(word => IRepresentOrderdString.FromBytes(word))
                 .Where(group => group.Count() > 1)
