@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using Anagramalist.Implementations;
 using NUnit.Framework;
 
@@ -16,7 +17,7 @@ public class AnagramalistTests
     [Test, TestCaseSource("SystemsToTest")]
     public void FindAllAnagrams_NoWords_ReturnsEmptyResult(IAnagramalist sut)
     {
-        var result = sut.FindAllAnagrams(new string[0]);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", new string[0])));
 
         Assert.IsNotNull(result);
         Assert.IsEmpty(result);
@@ -27,7 +28,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "drow"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsTrue(result.Any(x => x.Contains("word") && x.Contains("drow")));
     }
@@ -37,7 +38,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "drow", "drwo"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsTrue(result.Any(x => x.Contains("word") && x.Contains("drwo") && x.Contains("drow")));
     }
@@ -47,7 +48,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "drow", "x"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsTrue(result.Any(x => x.Contains("word") && x.Contains("drow") ));
     }
@@ -57,7 +58,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "drow", "xxxx"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsTrue(result.Any(x => x.Contains("word") && x.Contains("drow") ));
     }
@@ -67,7 +68,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "drow", "dog", "god"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsTrue(result.Any(x => x.Contains("dog") && x.Contains("god")));
         Assert.IsTrue(result.Any(x => x.Contains("word") && x.Contains("drow")));
@@ -78,7 +79,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"word", "yyyy", "xxxx"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         Assert.IsEmpty(result);
     }
@@ -88,7 +89,7 @@ public class AnagramalistTests
     {
         string[] input = new []{"xxxx", "word", "drow"};
 
-        var result = sut.FindAllAnagrams(input);
+        var result = sut.FindAllAnagrams(Encoding.UTF8.GetBytes(string.Join("\n", input)));
 
         CollectionAssert.AreEqual(new []{"word drow"}, result);
     }
