@@ -33,7 +33,7 @@ namespace anagram_kata2
             {
                 new AnagramalistParrallelGrouping_CustomStruct(),
 //                new AnagramalistLinq(),
-//                new AnagramalistParallelLinq(),
+                new AnagramalistParallelLinq(),
 //                new AnagramalistDictionary(),
             };
             Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
