@@ -17,7 +17,7 @@ namespace anagram_kata2
             var expectedNumberOfAnagrams = 20683;
             var allBytes = File.ReadAllBytes("wordlist.txt");
 
-            var testRepeatCount = 50;
+            var testRepeatCount = 200;
 
             var implementations = new List<IAnagramalist>()
             {
