@@ -22,7 +22,7 @@ namespace Anagramalist.Implementations
             foreach (var name_result in results.OrderBy(x => x.testResult.MedianTimeSeconds))
             {
                 Console.WriteLine(
-                    $"{index}. {name_result.name,-49} median from {testRepeatCount} tests: {name_result.testResult.MedianTimeSeconds:f6}s");
+                    $"{index}. {name_result.name,-51} median from {testRepeatCount} tests: {name_result.testResult.MedianTimeSeconds:f6}s");
                 index++;
             }
         }
