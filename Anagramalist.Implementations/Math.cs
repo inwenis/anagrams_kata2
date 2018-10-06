@@ -1,7 +1,10 @@
-﻿namespace test_string_vs_struct
+﻿using System.Runtime.CompilerServices;
+
+namespace test_string_vs_struct
 {
     public class Math
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Pow(int num, int pow)
         {
             if (pow == 0)

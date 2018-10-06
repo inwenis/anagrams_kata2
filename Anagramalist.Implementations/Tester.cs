@@ -57,6 +57,50 @@ namespace Anagramalist.Implementations
             return testResult;
         }
 
+        public static TestResult RunMultileTests(AnagramalistParrallelGrouping_CustomStruct_Bytes sut,
+            byte[][] words, int testRepeatCount, int expectedNumberOfAnagrams)
+        {
+            // run the anagramalist here so the JITer will compile all code
+            var resultLost = RunSingleTest(sut, words);
+
+            double sumSeconds = 0;
+            var results = new List<SingleTestResult2>();
+            for (int i = 1; i <= testRepeatCount; i++)
+            {
+                var result = RunSingleTest(sut, words);
+                results.Add(result);
+                sumSeconds += result.Time.TotalSeconds;
+                if (result.Anagrams.Length != expectedNumberOfAnagrams)
+                {
+                    Console.WriteLine("Wrong Number of anagrams!");
+                    Console.WriteLine(result.Anagrams.Length);
+                }
+
+                Console.SetCursorPosition(0, Console.CursorTop);
+                Console.Write(
+                    $"test {i} of {testRepeatCount}    last run: {result.Time.TotalSeconds}s average: {sumSeconds / (i)}s          ");
+            }
+
+            Console.WriteLine();
+
+            var testResult = TestResult.Create(results);
+
+            return testResult;
+        }
+
+        private static SingleTestResult2 RunSingleTest(AnagramalistParrallelGrouping_CustomStruct_Bytes sut, byte[][] words)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            var allAnagrams = sut.FindAllAnagrams(words);
+            sw.Stop();
+            return new SingleTestResult2
+            {
+                Anagrams = allAnagrams,
+                Time = sw.Elapsed
+            };
+        }
+
         private static SingleTestResult RunSingleTest(IAnagramalist sut, string[] words)
         {
             var sw = new Stopwatch();
@@ -76,6 +120,13 @@ namespace Anagramalist.Implementations
             public TimeSpan Time { get; set; }
         }
 
+        public class SingleTestResult2
+        {
+            public byte[][][] Anagrams { get; set; }
+            public TimeSpan Time { get; set; }
+        }
+
+
         public class TestResult
         {
             public List<SingleTestResult> Results;
@@ -90,6 +141,16 @@ namespace Anagramalist.Implementations
                 testResult.MedianTimeSeconds = Median(results.Select(x => x.Time));
                 return testResult;
             }
+
+            public static TestResult Create(List<SingleTestResult2> results)
+            {
+                var testResult = new TestResult();
+//                testResult.Results = results;
+                testResult.AverageTimeSeconds = results.Sum(x => x.Time.TotalSeconds) / results.Count;
+                testResult.MedianTimeSeconds = Median(results.Select(x => x.Time));
+                return testResult;
+            }
+
 
             private static double Median(IEnumerable<TimeSpan> values)
             {

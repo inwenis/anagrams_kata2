@@ -64,5 +64,39 @@
 
             return x;
         }
+
+        public static IRepresentOrderdString FromBytes(byte[] bytes)
+        {
+            IRepresentOrderdString x = new IRepresentOrderdString();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                var index = bytes[i] - 'A';
+                if (index < 0) //store all characters that come beofe 'A' in the 7th decimal place in the socond ulong character
+                {
+                    x.two += Math.Pow(10, 7);
+                }
+                else if (index <= 18) //store the count of characters A-S in the fist ulong
+                {
+                    x.one += Math.Pow(10, index);
+                }
+                else if(index <= 37) //store the count of characters T-Z a-f in the second ulong
+                {
+                    index -= 19;
+                    x.two += Math.Pow(10, index);
+                }
+                else if(index <= 57) //store the count of characters g-z in the third ulong
+                {
+                    index -= 38;
+                    x.three += Math.Pow(10, index);
+                }
+                else //store all other/special characters count in the 9th decimal place in the second ulong
+                {
+                    x.two += Math.Pow(10, 8);
+                }
+            }
+
+            return x;
+        }
+
     }
 }
