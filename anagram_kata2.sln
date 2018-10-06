@@ -7,11 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anagram_kata2", "anagram_ka
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anagram_kata2.Tests", "anagram_kata2.Tests\anagram_kata2.Tests.csproj", "{D831640C-DA4E-44F5-AD4E-1708FCF3E4D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_string_vs_struct", "test_string_vs_struct\test_string_vs_struct.csproj", "{BBFA84D4-ADBF-4523-8A18-C0A848744C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "anagram_kata.Core", "anagram_kata.Core\anagram_kata.Core.csproj", "{E4AF4808-5AA0-4DA1-BA9D-348C3978CED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anagram_kata.Core", "anagram_kata.Core\anagram_kata.Core.csproj", "{E4AF4808-5AA0-4DA1-BA9D-348C3978CED3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagramalist.Implementations", "Anagramalist.Implementations\Anagramalist.Implementations.csproj", "{D593FFC8-7365-49FA-8009-75695AE5E716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anagramalist.Implementations", "Anagramalist.Implementations\Anagramalist.Implementations.csproj", "{D593FFC8-7365-49FA-8009-75695AE5E716}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{D831640C-DA4E-44F5-AD4E-1708FCF3E4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D831640C-DA4E-44F5-AD4E-1708FCF3E4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D831640C-DA4E-44F5-AD4E-1708FCF3E4D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBFA84D4-ADBF-4523-8A18-C0A848744C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBFA84D4-ADBF-4523-8A18-C0A848744C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBFA84D4-ADBF-4523-8A18-C0A848744C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBFA84D4-ADBF-4523-8A18-C0A848744C93}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4AF4808-5AA0-4DA1-BA9D-348C3978CED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4AF4808-5AA0-4DA1-BA9D-348C3978CED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4AF4808-5AA0-4DA1-BA9D-348C3978CED3}.Release|Any CPU.ActiveCfg = Release|Any CPU

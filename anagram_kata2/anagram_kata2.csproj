@@ -58,10 +58,6 @@
       <Project>{d593ffc8-7365-49fa-8009-75695ae5e716}</Project>
       <Name>Anagramalist.Implementations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\test_string_vs_struct\test_string_vs_struct.csproj">
-      <Project>{BBFA84D4-ADBF-4523-8A18-C0A848744C93}</Project>
-      <Name>test_string_vs_struct</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

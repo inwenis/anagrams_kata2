@@ -34,14 +34,9 @@ namespace anagram_kata2
             var implementations = new List<IAnagramalist>()
             {
                 new AnagramalistParrallelGrouping_CustomStruct(),
-                new AnagramalistParrallelForEach_CustomStruct(),
-                new AnagramalistDictionary_CustomComparator(),
                 new AnagramalistLinq(),
                 new AnagramalistParallelLinq(),
-                new AnagramalistConcurentDictionary(),
                 new AnagramalistDictionary(),
-                new AnagramalistParallelForWithBatches(),
-                new AnagramalistConcurentDictionary_CutomComparator()
             };
             Console.WriteLine(".Net Core");
             Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: 50);
