@@ -11,6 +11,8 @@ namespace anagram_kata2
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(".Net Core");
+
             // the data comes from here http://codekata.com/kata/kata06-anagrams/
             var expectedNumberOfAnagrams = 20683;
             var allLines = File.ReadAllLines("wordlist.txt");
@@ -22,24 +24,19 @@ namespace anagram_kata2
 
             var sut = new AnagramalistParrallelGrouping_CustomStruct_Bytes();
 
-            var testResult = Tester.RunMultileTests(sut, bytes, 20, expectedNumberOfAnagrams);
+            var testRepeatCount = 50;
+            var testResult = Tester_bytes.RunMultileTests(sut, bytes, testRepeatCount, expectedNumberOfAnagrams);
 
-            Console.WriteLine($"test repeats: {20}");
-            Console.WriteLine(testResult.AverageTimeSeconds);
-            Console.WriteLine(testResult.MedianTimeSeconds);
-
-            Console.WriteLine("enter to exit");
-            Console.ReadLine();
+            Console.WriteLine($"X. {sut.GetType().Name,-49} median from {testRepeatCount} tests: {testResult.MedianTimeSeconds:f6}s");
 
             var implementations = new List<IAnagramalist>()
             {
                 new AnagramalistParrallelGrouping_CustomStruct(),
-                new AnagramalistLinq(),
-                new AnagramalistParallelLinq(),
-                new AnagramalistDictionary(),
+//                new AnagramalistLinq(),
+//                new AnagramalistParallelLinq(),
+//                new AnagramalistDictionary(),
             };
-            Console.WriteLine(".Net Core");
-            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: 50);
+            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
         }
 
     }

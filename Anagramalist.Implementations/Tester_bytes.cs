@@ -5,29 +5,9 @@ using System.Linq;
 
 namespace Anagramalist.Implementations
 {
-    public class Tester
+    public class Tester_bytes
     {
-        public static void TestAll(string[] words, int expectedNumberOfAnagrams, List<IAnagramalist> suts, int testRepeatCount)
-        {
-            var results = new List<dynamic>();
-            foreach (var sut in suts)
-            {
-                var name = sut.GetType().Name;
-                Console.WriteLine($"{name}");
-                var testResult = RunMultileTests(sut, words, testRepeatCount, expectedNumberOfAnagrams);
-                results.Add(new {name, testResult});
-            }
-
-            int index = 1;
-            foreach (var name_result in results.OrderBy(x => x.testResult.AverageTimeSeconds))
-            {
-                Console.WriteLine(
-                    $"{index}. {name_result.name,-49} median from {testRepeatCount} tests: {name_result.testResult.MedianTimeSeconds:f6}s");
-                index++;
-            }
-        }
-
-        public static TestResult RunMultileTests(IAnagramalist sut, string[] words, int testRepeatCount, int expectedNumberOfAnagrams)
+        public static TestResult RunMultileTests(AnagramalistParrallelGrouping_CustomStruct_Bytes sut, byte[][] words, int testRepeatCount, int expectedNumberOfAnagrams)
         {
             // run the anagramalist here so the JITer will compile all code
             var resultLost = RunSingleTest(sut, words);
@@ -57,7 +37,7 @@ namespace Anagramalist.Implementations
             return testResult;
         }
 
-        private static SingleTestResult RunSingleTest(IAnagramalist sut, string[] words)
+        private static SingleTestResult RunSingleTest(AnagramalistParrallelGrouping_CustomStruct_Bytes sut, byte[][] words)
         {
             var sw = new Stopwatch();
             sw.Start();
