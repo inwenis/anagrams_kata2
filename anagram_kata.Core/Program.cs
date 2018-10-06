@@ -22,7 +22,7 @@ namespace anagram_kata2
 
             var bytes = words.Select(x => Encoding.UTF8.GetBytes(x)).ToArray();
 
-            var testRepeatCount = 50;
+            var testRepeatCount = 20;
             var implementationsUsingBytes = new List<IAnagramalistFromBytes>()
             {
                 new AnagramalistParrallelGrouping_CustomStruct_Bytes(),

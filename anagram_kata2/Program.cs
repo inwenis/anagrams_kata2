@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Anagramalist.Implementations;
 
 namespace anagram_kata2
@@ -10,6 +11,8 @@ namespace anagram_kata2
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(".Net Framework");
+            
             // the data comes from here http://codekata.com/kata/kata06-anagrams/
             var expectedNumberOfAnagrams = 20683;
             var allLines = File.ReadAllLines("wordlist.txt");
@@ -17,15 +20,22 @@ namespace anagram_kata2
                 .Where(x => x != string.Empty)
                 .ToArray();
 
+            var bytes = words.Select(x => Encoding.UTF8.GetBytes(x)).ToArray();
+
+            var testRepeatCount = 20;
+            var implementationsUsingBytes = new List<IAnagramalistFromBytes>()
+            {
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes(),
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes_2(),
+            };
+            Tester_bytes.TestAll(bytes, expectedNumberOfAnagrams, implementationsUsingBytes, testRepeatCount: testRepeatCount);
+
             var implementations = new List<IAnagramalist>()
             {
                 new AnagramalistParrallelGrouping_CustomStruct(),
-                new AnagramalistLinq(),
                 new AnagramalistParallelLinq(),
-                new AnagramalistDictionary(),
             };
-            Console.WriteLine(".Net Framework");
-            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: 50);
+            Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
         }
     }
 }
