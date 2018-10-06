@@ -22,12 +22,13 @@ namespace anagram_kata2
 
             var bytes = words.Select(x => Encoding.UTF8.GetBytes(x)).ToArray();
 
-            var sut = new AnagramalistParrallelGrouping_CustomStruct_Bytes();
-
             var testRepeatCount = 50;
-            var testResult = Tester_bytes.RunMultileTests(sut, bytes, testRepeatCount, expectedNumberOfAnagrams);
-
-            Console.WriteLine($"X. {sut.GetType().Name,-49} median from {testRepeatCount} tests: {testResult.MedianTimeSeconds:f6}s");
+            var implementationsUsingBytes = new List<IAnagramalistFromBytes>()
+            {
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes(),
+                new AnagramalistParrallelGrouping_CustomStruct_Bytes_2(),
+            };
+            Tester_bytes.TestAll(bytes, expectedNumberOfAnagrams, implementationsUsingBytes, testRepeatCount: testRepeatCount);
 
             var implementations = new List<IAnagramalist>()
             {

@@ -19,7 +19,7 @@ namespace Anagramalist.Implementations
             }
 
             int index = 1;
-            foreach (var name_result in results.OrderBy(x => x.testResult.AverageTimeSeconds))
+            foreach (var name_result in results.OrderBy(x => x.testResult.MedianTimeSeconds))
             {
                 Console.WriteLine(
                     $"{index}. {name_result.name,-49} median from {testRepeatCount} tests: {name_result.testResult.MedianTimeSeconds:f6}s");
