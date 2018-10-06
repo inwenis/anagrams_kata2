@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using test_string_vs_struct;
 
 namespace Anagramalist.Implementations
@@ -11,7 +12,7 @@ namespace Anagramalist.Implementations
                 .AsParallel()
                 .GroupBy(word => IRepresentOrderdString.FromBytes(word))
                 .Where(group => group.Count() > 1)
-                .Select(group => string.Join(" ", group))
+                .Select(group => string.Join(" ", group.Select(x => Encoding.UTF8.GetString(x))))
                 .ToArray();
             return anagrams.ToArray();
         }

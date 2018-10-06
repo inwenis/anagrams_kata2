@@ -32,9 +32,7 @@ namespace anagram_kata2
             var implementations = new List<IAnagramalist>()
             {
                 new AnagramalistParrallelGrouping_CustomStruct(),
-//                new AnagramalistLinq(),
                 new AnagramalistParallelLinq(),
-//                new AnagramalistDictionary(),
             };
             Tester.TestAll(words, expectedNumberOfAnagrams, implementations, testRepeatCount: testRepeatCount);
         }
